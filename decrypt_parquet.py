@@ -34,5 +34,5 @@ output_buffer.seek(0)
 print("Uploading decrypted Parquet file to S3...")
 s3.upload_fileobj(output_buffer, BUCKET_NAME, OUTPUT_KEY_DECRYPTED)
 
-print("✅ Done!")
+print("Done!")
 

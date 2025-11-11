@@ -1,0 +1,14 @@
+name: rbac_in_data_lakes
+channels:
+  - conda-forge
+  - defaults
+dependencies:
+  - python=3.10
+  - pandas
+  - pyarrow
+  - boto3
+  - cryptography
+  - pip
+  - pip:
+    - s3fs          # optional: lets pandas read from s3 directly
+    - fastparquet   # optional alternative parquet engine
