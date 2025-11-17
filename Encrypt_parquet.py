@@ -7,7 +7,7 @@ from cryptography.fernet import Fernet
 
 BUCKET_NAME = "rher-s3-test-bucket"
 INPUT_KEY = "sample_sensitive_data.parquet"
-OUTPUT_KEY = "path/to/output_encrypted.parquet"
+OUTPUT_KEY = "sample_sensitive_data_encrypted.parquet"
 COLUMN_TO_ENCRYPT = "salary" 
 FERNET_KEY = "U1eIY6p4bKjOaMycX1VyMshD0tRmfWqC7xJ0MMT8oO0="
 fernet = Fernet(FERNET_KEY)
