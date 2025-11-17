@@ -7,7 +7,6 @@ Start by setting up credentials towards S3 by executing the following commands:
 ```
 export AWS_ACCESS_KEY_ID="xxx"
 export AWS_SECRET_ACCESS_KEY="xxx"
-export AWS_SESSION_TOKEN="xxxx"
 ```
 
 This will setup access to an admin account
