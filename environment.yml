@@ -10,5 +10,5 @@ dependencies:
   - cryptography
   - pip
   - pip:
-    - s3fs          # optional: lets pandas read from s3 directly
-    - fastparquet   # optional alternative parquet engine
+    - s3fs          
+    - fastparquet   
