@@ -1,0 +1,23 @@
+title Experiment 3
+
+participant Client
+participant DAL
+participant KMS
+participant Data Lake
+
+Client->DAL:getData(role)
+
+
+DAL->KMS:getKey(role)
+DAL<--KMS:Return Key
+
+DAL->Data Lake:getData()
+DAL<--Data Lake:Return Data
+
+DAL->DAL:decryptParquet(key)
+
+Client<--DAL:Return data
+
+
+
+

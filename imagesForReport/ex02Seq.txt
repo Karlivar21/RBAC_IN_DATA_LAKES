@@ -1,0 +1,12 @@
+title Experiment 2
+
+participant Client
+participant KMS
+participant Data Lake
+
+Client->KMS:getKey(role)
+Client<--KMS:Return Key
+
+Client->Data Lake:getData()
+Client<--Data Lake:Return Data
+Client->Client:decryptParquet(key)

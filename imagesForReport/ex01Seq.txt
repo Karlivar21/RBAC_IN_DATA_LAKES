@@ -1,0 +1,8 @@
+title Experiment 1
+
+participant Client
+participant Data Lake
+
+
+Client->Data Lake:getData()
+Client<-Data Lake:return data
