@@ -1,0 +1,6 @@
+participant Client
+participant Data Lake
+
+
+Client->Data Lake:retrieve_data()
+Client<-Data Lake:return data

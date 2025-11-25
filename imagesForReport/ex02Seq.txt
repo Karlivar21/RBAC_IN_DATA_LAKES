@@ -1,0 +1,10 @@
+participant Client
+participant KMS
+participant Data Lake
+
+Client->KMS:get_key(role)
+Client<--KMS:return key
+
+Client->Data Lake:retrieve_data()
+Client<--Data Lake:return data
+Client->Client:decrypt_parquet(data, key)
