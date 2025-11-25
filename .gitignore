@@ -1,2 +1,9 @@
 .vscode/settings.json
 .env
+/.idea/.gitignore
+/.idea/misc.xml
+/.idea/modules.xml
+/.idea/inspectionProfiles/profiles_settings.xml
+/.idea/inspectionProfiles/Project_Default.xml
+/.idea/RBAC_IN_DATA_LAKES.iml
+/.idea/vcs.xml
