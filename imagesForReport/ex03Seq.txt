@@ -1,23 +1,18 @@
-title Experiment 3
-
 participant Client
 participant DAL
 participant KMS
 participant Data Lake
 
-Client->DAL:getData(role)
+Client->DAL:get_data(token)
 
+DAL->DAL:role = authenticate_user(token)
 
-DAL->KMS:getKey(role)
-DAL<--KMS:Return Key
+DAL->KMS:get_key(role)
+DAL<--KMS:return key
 
-DAL->Data Lake:getData()
-DAL<--Data Lake:Return Data
+DAL->Data Lake:retrieve_data()
+DAL<--Data Lake:return data
 
-DAL->DAL:decryptParquet(key)
+DAL->DAL:decrypt_parquet(data, key)
 
-Client<--DAL:Return data
-
-
-
-
+Client<--DAL:return data
