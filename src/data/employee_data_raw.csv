@@ -1,0 +1,11 @@
+ID,Name,Email,Department,Salary,Password
+1,Alice,alice@example.com,HR,55000,DummyPassword1
+2,Bob,bob@example.com,Engineering,72000,DummyPassword2
+3,Charlie,charlie@example.com,Marketing,63000,DummyPassword3
+4,David,david@example.com,Finance,80000,DummyPassword4
+5,Eva,eva@example.com,Engineering,75000,DummyPassword5
+6,Frank,frank@example.com,HR,70000,DummyPassword6
+7,Grace,grace@example.com,Sales,85000,DummyPassword7
+8,Hannah,hannah@example.com,Finance,65000,DummyPassword8
+9,Ian,ian@example.com,Marketing,54800,DummyPassword9
+10,Julia,julia@example.com,Sales,74500,DummyPassword10
