@@ -1,11 +1,17 @@
 
-
+# S3 constants
 BUCKET_NAME = "s3-rbac-in-data-lakes-experiments"
 ACCOUNT_ID = "501994300007" 
-SALARY_ENCRYPTED_FILE_NAME = "sample_sensitive_data_encrypted.parquet"
-COLUMN_TO_ENCRYPT1 = "Salary" 
-COLUMN_TO_ENCRYPT2 = "Password"
+REGION = "eu-north-1"
+EMPLOYEE_DATA_KEY = "employee_data_encrypted.parquet"
 
-ENGINEERING = "RBAC_IN_DATA_LAKES_ROLE_READ_ONLY"
-HR = "RBAC_IN_DATA_LAKES_ROLE_SECURE_ANALYST"
-ADMIN   = "RBAC_IN_DATA_LAKES_ROLE_ADMIN"
+# Encrypted column KMS Key IDs
+SALARY_KEY_ID = "86c41c3f-fc21-4730-a20b-b755e5b63ebb"
+PASSWORD_KEY_ID = "5722129f-2136-4ef4-8b53-5a242b553f34"
+
+
+
+# Roels
+ROLE_ENGINEER = "ENGINEER"
+ROLE_HR = "HR"
+ROLE_ADMIN = "ADMIN"
