@@ -48,12 +48,6 @@ def usable_keys(kms):
             else:
                 raise
     return usable
-    
-def get_keys_for_role(role):
-    credentials = get_aws_credentials(role)
-    kms_client = create_aws_client_for(credentials, "kms")
-    return usable_keys(kms_client)
-
 
 def get_aws_credentials(role):
     ROLE_ARN = f"arn:aws:iam::{ACCOUNT_ID}:role/{role}" 
@@ -98,4 +92,3 @@ def make_crypto_factory_for_kms(boto3_kms_client) -> pe.CryptoFactory:
         return AwsKmsClient.AwsKmsClient(boto3_kms_client, key_map)
 
     return pe.CryptoFactory(kms_client_factory)
-
