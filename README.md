@@ -2,14 +2,9 @@
 This repository consists of our practical eexperiments for accessing files stored in an S3 data-bucket.
 
 ## How to run
-Start by setting up credentials towards S3 by executing the following commands:
+To run the code AWS credentials are required. Ask Rasmus Herskind (rher) or Karl Kvaran (kkva) for the credentials.
 
-```
-export AWS_ACCESS_KEY_ID="xxx"
-export AWS_SECRET_ACCESS_KEY="xxx"
-```
-
-This will setup access to an admin account
+Each experiment is designed to be able to run independent of each other.
 
 
 

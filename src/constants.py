@@ -14,9 +14,9 @@ EMPLOYEE_DATA_RAW_KEY = "employee_data_raw.parquet"
 EMPLOYEE_DATA_ENCRYPTED_KEY = "employee_data_encrypted.parquet"
 
 # File paths
-EMPLOYEE_DATA_RAW_CSV_PATH = "../data/employee_data_raw.csv"
-EMPLOYEE_DATA_RAW_PARQUET_PATH = "../data/employee_data_raw.parquet"
-EMPLOYEE_DATA_ENCRYPTED_PATH = "../data/employee_data_encrypted.parquet"
+EMPLOYEE_DATA_RAW_CSV_PATH = "data/employee_data_raw.csv"
+EMPLOYEE_DATA_RAW_PARQUET_PATH = "data/employee_data_raw.parquet"
+EMPLOYEE_DATA_ENCRYPTED_PATH = "data/employee_data_encrypted.parquet"
 
 # Roles
 ROLE_ENGINEER = "ENGINEER"
