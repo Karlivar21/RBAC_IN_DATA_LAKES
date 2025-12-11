@@ -8,6 +8,7 @@ import AwsKmsClient
 import pandas as pd
 import pyarrow.parquet as pq
 import pyarrow.parquet.encryption as pe
+import pyarrow as pa
 
 def list_s3_bucket_objects(s3_client):
     response = s3_client.list_objects_v2(Bucket=BUCKET_NAME)
@@ -18,7 +19,7 @@ def list_s3_bucket_objects(s3_client):
     else:
         print(f"No objects found in bucket '{BUCKET_NAME}'.")
 
-def retrieve_data(s3_client, file_name):
+def get_data(s3_client, file_name):
     """Read a Parquet file from S3"""
     try:
         response = s3_client.get_object(Bucket=BUCKET_NAME, Key=file_name)
@@ -26,7 +27,7 @@ def retrieve_data(s3_client, file_name):
         print(f"\n successfully loaded '{file_name}' from S3 bucket '{BUCKET_NAME}'")
         return data
     except Exception as e:
-        print(f"Failed to retrieve '{file_name}' from S3: {e}")
+        print(f"Failed to get '{file_name}' from S3: {e}")
         return None
     
 def usable_keys(kms):
@@ -92,3 +93,85 @@ def make_crypto_factory_for_kms(boto3_kms_client) -> pe.CryptoFactory:
         return AwsKmsClient.AwsKmsClient(boto3_kms_client, key_map)
 
     return pe.CryptoFactory(kms_client_factory)
+
+def decrypt_parquet(parquet_file, kms_client):
+    """
+    Try to read a modular encrypted Parquet file for a given role (KMS client).
+
+    - If the role can decrypt the footer but not all columns:
+        Try each column individually and keep only those that can be read.
+      * Else:
+          Raise as soon as any column fails.
+
+    - If the role cannot decrypt the footer at all (no footer key access),
+      opening ParquetFile will raise immediately.
+    """
+    kms_conn_config = pe.KmsConnectionConfig(
+        kms_instance_id=f"aws-kms-{REGION}",
+        kms_instance_url=f"https://kms.{REGION}.amazonaws.com"
+    )
+    crypto_factory = make_crypto_factory_for_kms(kms_client)
+    decryption_props = crypto_factory.file_decryption_properties(kms_conn_config)
+
+    try:
+        pf = pq.ParquetFile(
+            parquet_file,
+            decryption_properties=decryption_props
+        )
+    except Exception as e:
+        print(f"Failed to open Parquet file: {e}")
+        return None
+
+    schema = pf.schema
+    print("File columns:", schema.names)
+        
+    # Try reading columns one by one
+    readable_cols = []
+    for name in schema.names:
+        try:
+            pf.read(columns=[name])  # attempt to read single column
+            readable_cols.append(name)
+        except Exception as e:
+            print(f"Skipping column {name} due to decryption error: {e}")
+
+    if not readable_cols:
+        print("No readable columns for this role.")
+        return None
+
+    # Finally read only the columns that worked
+    table = pf.read(columns=readable_cols)
+    df = table.to_pandas()
+    return df
+
+def encrypt_parquet(df, kms_client):
+    """
+    Encrypt a Parquet file with modular encryption using the given KMS client.
+    """
+    kms_conn_config = pe.KmsConnectionConfig(
+        kms_instance_id=f"aws-kms-{REGION}",
+        kms_instance_url=f"https://kms.{REGION}.amazonaws.com"
+    )
+    crypto_factory = make_crypto_factory_for_kms(kms_client)
+    encryption_config = pe.EncryptionConfiguration(
+        footer_key="file-access-key",              
+        column_keys={
+            "salary-key": ["Salary"],     
+            "password-key": ["Password"] 
+        },
+        plaintext_footer=False         
+    )
+    file_encryption_props = crypto_factory.file_encryption_properties(
+        kms_conn_config,
+        encryption_config
+    )
+
+    table = pa.Table.from_pandas(df)
+    buffer = BytesIO()
+    pq.write_table(
+        table,
+        buffer,
+        encryption_properties=file_encryption_props
+    )
+    buffer.seek(0)
+    return buffer
+

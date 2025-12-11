@@ -11,16 +11,19 @@ FILE_ACCESS_KEY_ID = "d229ff0a-b839-4732-9dd8-602c38a4487b"
 
 # File keys
 EMPLOYEE_DATA_RAW_KEY = "employee_data_raw.parquet"
-EMPLOYEE_DATA_ENCRYPTED_LOCALLY_KEY = "employee_data_encrypted_locally.parquet"
-EMPLOYEE_DATA_ENCRYPTED_MODULAR_KEY = "employee_data_encrypted_modular.parquet"
+EMPLOYEE_DATA_ENCRYPTED_KEY = "employee_data_encrypted.parquet"
 
 # File paths
 EMPLOYEE_DATA_RAW_CSV_PATH = "../data/employee_data_raw.csv"
 EMPLOYEE_DATA_RAW_PARQUET_PATH = "../data/employee_data_raw.parquet"
-EMPLOYEE_DATA_ENCRYPTED_LOCALLY_PATH = "../data/employee_data_encrypted_locally.parquet"
-EMPLOYEE_DATA_ENCRYPTED_MODULAR_PATH = "../data/employee_data_encrypted_modular.parquet"
+EMPLOYEE_DATA_ENCRYPTED_PATH = "../data/employee_data_encrypted.parquet"
 
 # Roles
 ROLE_ENGINEER = "ENGINEER"
 ROLE_HR = "HR"
 ROLE_ADMIN = "ADMIN"
+
+# Tokens
+TOKEN_ENGINEER = "ENGINEER_TOKEN"
+TOKEN_HR = "HR_TOKEN"
+TOKEN_ADMIN = "ADMIN_TOKEN"
