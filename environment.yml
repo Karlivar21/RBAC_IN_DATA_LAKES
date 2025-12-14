@@ -12,3 +12,4 @@ dependencies:
   - pip:
     - s3fs          
     - fastparquet   
+    - dotenv
