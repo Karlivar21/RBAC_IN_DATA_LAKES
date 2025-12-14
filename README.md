@@ -7,6 +7,7 @@ To run the code AWS credentials are required. Ask Rasmus Herskind (rher) or Karl
 Each experiment is designed to be able to run independent of each other.
 
 ## File structure 
+```
 RBAC_IN_DATA_LAKES/
 │
 ├── imagesForReport/                # Figures and diagrams used in the report
